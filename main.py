@@ -10,7 +10,7 @@ def main():
     client = genai.Client(api_key=api_key)
 
     if (len(sys.argv) < 2):
-        raise Exception("Error: Not enough input arguments.")
+        raise Exception("Error: Not enough input arguments. Please type a string.")
         sys.exit(1)
     
     user_prompt = sys.argv[1]
