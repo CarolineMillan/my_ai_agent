@@ -1,11 +1,13 @@
 from functions.get_file_content import get_file_content
 from functions.get_files_info import get_files_info
+from functions.write_file import write_file
 
 
 def main():
-   print("in main test function") 
+    print("in main test function")
+    
     # GET_FILES_INFO()
-   # print("TESTING GET_FILES_INFO()...")
+    # print("TESTING GET_FILES_INFO()...")
     
     # CALCULATOR TEST 1
     #expected_str1 = "- main.py: file_size=576 bytes, is_dir=False\n- tests.py: file_size=1343 bytes, is_dir=False\n- pkg: file_size=128 bytes, is_dir=True"
@@ -76,6 +78,19 @@ def main():
 #    # TEST 5
 #    actual_str5 = get_file_content("calculator", "pkg/does_not_exist.py") # this should return an error string
 #    print(actual_str5)
+
+    # TESTING WRITE_FILE()
+    
+    # TEST 1
+    
+    test1 = write_file("calculator", "lorem.txt", "wait, this isn't lorem ipsum")
+    test2 = write_file("calculator", "pkg/morelorem.txt", "lorem ipsum dolor sit amet")
+    test3 = write_file("calculator", "/tmp/temp.txt", "this should not be allowed")
+    
+    print(test1)
+    print(test2)
+    print(test3)
+
     
    
     
