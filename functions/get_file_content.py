@@ -1,5 +1,6 @@
 import os
 from config import CHAR_LIMIT
+from google.genai import types
 
 def get_file_content(working_directory, filepath):
     abs_directory = os.path.abspath(working_directory)
@@ -23,3 +24,19 @@ def get_file_content(working_directory, filepath):
         except:
             raise Exception("Error: cannot open file")
     return ans
+
+
+# this schema tells the LLM how to use the function
+schema_get_file_content = types.FunctionDeclaration(
+    name="get_file_content",
+    description="Prints the content of a file, truncated at 10,000 characters, constrained to the working directory.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "filepath": types.Schema(
+                type=types.Type.STRING,
+                description="The file to be printed, relative to the working directory.",
+            ),
+        },
+    ),
+)

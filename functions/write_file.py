@@ -1,4 +1,5 @@
 import os
+from google.genai import types
 
 
 def write_file(working_directory, filepath, content):
@@ -18,3 +19,23 @@ def write_file(working_directory, filepath, content):
         raise Exception("Error: couldn't open file")
         
     return f'Successfully wrote to "{filepath}" ({len(content)} characters written)'
+
+
+# this schema tells the LLM how to use the function
+schema_write_file = types.FunctionDeclaration(
+    name="write_file",
+    description="Writes to a file in the specified directory, overwriting the file if it already exists, constrained to the working directory.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "filepath": types.Schema(
+                type=types.Type.STRING,
+                description="The file to be run, relative to the working directory.",
+            ),
+            "content": types.Schema(
+                type=types.Type.STRING,
+                description="The content to be written to the file.",
+            )
+        },
+    ),
+)
